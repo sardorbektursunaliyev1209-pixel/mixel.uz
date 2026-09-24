@@ -560,7 +560,7 @@ function ProductsPage() {
                           aria-label="В избранное"
                           className="flex flex-1 justify-center border-x border-neutral-200 py-4 text-neutral-400 transition hover:bg-red-50 hover:text-[#E8382D] active:scale-95"
                         >
-                          <MdFavorite className="h-6 w-6" />
+                          <MdFavorite className="h-6 w-7" />
                         </button>
                         <button
                           type="button"
