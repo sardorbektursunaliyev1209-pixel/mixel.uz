@@ -8,16 +8,17 @@ import {
 } from "react-icons/io5";
 import { LuScale } from "react-icons/lu";
 import Logo from "../../Componets/Logo/Logo";
-// import LogoRasm from "../../../public/Navbar-img/logoRasm.png"
+import LogoRasm from "../../../public/Navbar-img/logoRasm.png"
+import { Link } from "react-router-dom";
 export function MainHeader() {
   return (
     <>
       <div className="MainHerader py-4">
         <div className="container_1200 flex items-center gap-5 justify-between">
-          <div className="flex items-center ">
-{/* <img src={LogoRasm} alt="" /> */}
+          <Link to={"/"} className="flex items-center ">
+<img src={LogoRasm} alt="" className="w-15" />
             <Logo  />
-          </div>
+          </Link>
           <div className="flex items-center w-full max-w-[600px] h-[42px] bg-white border border-[#ed3a2d] rounded-md overflow-hidden">
             <div className="flex items-center gap-1 px-4 h-[24px] border-r border-gray-300 text-sm text-gray-800 whitespace-nowrap cursor-pointer">
               <span>Все категории</span>

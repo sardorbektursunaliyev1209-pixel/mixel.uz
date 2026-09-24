@@ -3,8 +3,8 @@ import HeroImg from "../../../public/Hero-Img/HeroImg.png";
 export function Hero() {
   return (
     <>
-      <div className="Her">
-        <div className="container_1200 flex items-center justify-between py-19">
+      <div className="Hero mt-[36px]">
+        <div className="container_1200 flex items-center justify-between ">
           <div className="Left w-[550px]">
             <img src={HeroImg} alt="" />
           </div>

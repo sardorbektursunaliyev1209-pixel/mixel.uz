@@ -1,11 +1,11 @@
 import { LuMoveLeft, LuMoveRight } from "react-icons/lu";
-import canon from "../../../../public/Brands-img/canon.png";
-import mi from "../../../../public/Brands-img/mi.png";
-import olg from "../../../../public/Brands-img/olg.png";
-import samsung from "../../../../public/Brands-img/samsung.png";
-import artel from "../../../../public/Brands-img/artel.png";
+import canon from "../../../../../public/Brands-img/canon.png";
+import mi from "../../../../../public/Brands-img/mi.png";
+import olg from "../../../../../public/Brands-img/olg.png";
+import samsung from "../../../../../public/Brands-img/samsung.png";
+import artel from "../../../../../public/Brands-img/artel.png";
 
-function Brands() {
+export function Brands() {
   return (
     <>
       <div className="Brands py-12">
@@ -52,4 +52,3 @@ function Brands() {
   );
 }
 
-export default Brands;

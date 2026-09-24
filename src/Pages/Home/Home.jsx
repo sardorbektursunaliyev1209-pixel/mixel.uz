@@ -1,14 +1,19 @@
-import Aksiya from "../../Componets/Aksiya/Aksiya"
-import PopularCategories from "../PopularCategories/PopularCategories"
-import Brands from "./Brands/Brands"
-
+import PopularCategories from "../PopularCategories/PopularCategories";
+import { Brands } from "./Sections/Brands/Brands";
+import Cards from "./Sections/Card/Cards";
+import Recomend from "./Sections/Discount/Recomend";
+import Gaget from "./Sections/Gagets/Gaget";
+import Product from "./Sections/Products/Product";
 function Home() {
   return (
     <>
-      <PopularCategories/>
-      <Brands/>
+      <Gaget />
+      <PopularCategories />
+      <Product />
+      <Cards />
+      <Recomend />
+      <Brands />
     </>
   );
 }
-
 export default Home;

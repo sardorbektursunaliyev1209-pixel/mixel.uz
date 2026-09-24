@@ -10,6 +10,7 @@ import {
   MdPhoneIphone,
   MdRouter,
 } from "react-icons/md";
+import { Link } from "react-router-dom";
 const categories = [
   { id: "phones", title: "Телефоны", icon: MdPhoneIphone, banner:  "/CategoriesMenu-img/phone.jpg" },
   { id: "laptops", title: "Ноутбуки", icon: MdLaptopChromebook , banner : "/CategoriesMenu-img/laptops.jpg"  },
@@ -40,7 +41,7 @@ const  subcategoriesMap = {
   "ip-phones": ["IP телефоны", "Шлюзы"],
 };
 
-export function CategoriesMenu() {
+export function CategoriesMenu({onLinkClick}) {
   const [activeId, setActiveId] = useState("phones");
   const activeCategory = categories.find((item) => item.id === activeId);
   return (
@@ -67,12 +68,13 @@ export function CategoriesMenu() {
         <div className="px-6 w-[280px] border-l border-gray-100">
           <h3 className="text-xl font-medium mb-4">{activeCategory.title}</h3>
           {subcategoriesMap[activeId].map((sub) => (
-            <div
+            <Link to={`/category/${sub}`}
               key={sub}
-              className="py-2 text-sm hover:bg-gray-100 rounded cursor-pointer"
-            >
+              className="block py-2 text-sm hover:bg-gray-100 rounded cursor-pointer"
+           onClick={onLinkClick}
+           >
               {sub}
-            </div>
+            </Link>
           ))}
         </div>
         <div className="flex-1   ">

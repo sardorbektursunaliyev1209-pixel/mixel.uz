@@ -22,7 +22,7 @@ export function NavMenu() {
             <a className="cursor-pointer transition-opacity hover:opacity-80">Оргтехника</a>
           </nav>
         </div>
-        {isOpen && <CategoriesMenu />}
+        {isOpen && <CategoriesMenu onLinkClick={() => setIsOpen(false)} />}
       </div>
     </>
   );
