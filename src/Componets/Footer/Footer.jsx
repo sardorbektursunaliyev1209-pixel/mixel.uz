@@ -4,7 +4,6 @@ import {
   FaFacebookF,
   FaYoutube,
 } from "react-icons/fa";
-import LogoRasm from "../../../public/Navbar-img/LogoRasm.png";
 import Logo from "../Logo/Logo";
 export function Footer() {
   return (
@@ -13,7 +12,6 @@ export function Footer() {
         <div className="container_1200 flex justify-between items-start">
           <div className="w-[377px] flex flex-col">
             <div className="flex items-center">
-              <img src={LogoRasm} alt="" />
               <Logo  />
             </div>
             <p className="text-xs mt-6">График работы колл-центра</p>
