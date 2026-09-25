@@ -2,13 +2,18 @@ import { useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 import { GoChevronUp, GoChevronRight } from "react-icons/go";
 import { LuScale } from "react-icons/lu";
-import { MdChevronLeft, MdFilterList, MdGridView, MdViewList } from "react-icons/md";
-import { MdShoppingCart, MdFavorite } from "react-icons/md";
+import {
+  MdChevronLeft,
+  MdFilterList,
+  MdGridView,
+  MdViewList,
+  MdShoppingCart,
+  MdFavorite,
+} from "react-icons/md";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { GrMoney } from "react-icons/gr";
-import { FiTrendingUp } from "react-icons/fi";
 
-const productss = [
+const cheaperProducts = [
   {
     image: "/imgs/Card9.png",
     line1: "Умные часы Haylou",
@@ -44,41 +49,6 @@ const productss = [
     price: "130 000",
     oldPrice: "200 000",
   },
-  {
-    image: "/imgs/Card5.png",
-    line1: "Кард-ридер Earldom OT27",
-    line2: "",
-    price: "18 000",
-    oldPrice: "253 000",
-  },
-  {
-    image: "/imgs/Card4.png",
-    line1: "Умные часы Haylou",
-    line2: "RT-LS05S",
-    price: "7 250 000",
-    oldPrice: "9 500 000",
-  },
-  {
-    image: "/imgs/Card3.png",
-    line1: "Умные часы Haylou",
-    line2: "RT-LS05S",
-    price: "165 000",
-    oldPrice: "256 000",
-  },
-  {
-    image: "/imgs/Card2.png",
-    line1: "Умные часы Haylou",
-    line2: "RT-LS05S",
-    price: "18 000",
-    oldPrice: "30 000",
-  },
-  {
-    image: "/imgs/Card1.png",
-    line1: "Геймпад Logitech F710",
-    line2: "",
-    price: "365 000",
-    oldPrice: "458 000",
-  },
 ];
 
 const brands = [
@@ -89,9 +59,7 @@ const brands = [
 ];
 
 const batteryOptions = ["1821 мА·ч", "3000 мА·ч", "4500 мА·ч", "5000 мА·ч"];
-
 const countries = ["Вьетнам", "Китай", "Artel", "Huawei"];
-
 const collapsedFilters = [
   "Количество ядер",
   "Фронтальная камера",
@@ -100,6 +68,7 @@ const collapsedFilters = [
   "Разъем для наушников",
   "Разъем для наушников",
 ];
+
 const products = [
   {
     image: "/imgs/Card1.png",
@@ -183,6 +152,7 @@ const products = [
     time: ["27", "21", "32", "05"],
   },
 ];
+
 const card =
   "group relative w-65 flex flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white text-center transition-all duration-300 before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-[3px] before:origin-left before:scale-x-0 before:bg-gradient-to-r before:from-[#E8382D] before:to-orange-400 before:transition-transform before:duration-500 hover:border-[#E8382D]/40 hover:shadow-[0_22px_44px_-14px_rgba(232,56,45,0.45)] hover:before:scale-x-100 motion-safe:hover:-translate-y-1.5";
 
@@ -190,6 +160,8 @@ function ProductsPage() {
   const [minPrice, setMinPrice] = useState(300000);
   const [maxPrice, setMaxPrice] = useState(103300000);
   const [activeTag, setActiveTag] = useState("Игровые");
+  const [viewMode, setViewMode] = useState("grid");
+
 
   const tags = [
     "Realme",
@@ -202,33 +174,45 @@ function ProductsPage() {
     "Смартфоны",
     "Игровые",
   ];
+
   return (
     <div className="ProductsPage">
       <div className="container_1200 py-6">
         <div className="flex justify-between">
           <div className="flex items-center gap-46">
-          <h1 className="text-[20px]">Смартфоны в Ташкенте</h1>
+            <h1 className="text-[20px]">Смартфоны в Ташкенте</h1>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-gray-500">
-                <GrMoney size={30} color="gray"  />
+                <GrMoney size={30} color="gray" />
                 <h3>По цене</h3>
               </div>
-              <div className="flex items-center gap-2  text-gray-500">
+              <div className="flex items-center gap-2 text-gray-500">
                 <MdFilterList size={30} color="gray" />
                 <h3>По популярности</h3>
               </div>
             </div>
           </div>
+
           <div className="flex items-center gap-2">
-            <MdGridView size={25} color="red"/>
-            <MdViewList size={25} />
+            <button onClick={() => setViewMode("grid")}>
+              <MdGridView
+                size={25}
+                color={viewMode === "grid" ? "#ed3a2d" : "gray"}
+              />
+            </button>
+            <button onClick={() => setViewMode("list")}>
+              <MdViewList
+                size={25}
+                color={viewMode === "list" ? "#ed3a2d" : "gray"}
+              />
+            </button>
           </div>
         </div>
 
         <br />
+
         <div className="flex gap-10">
-          <div className="left w-[360px] h-[1386px]  border border-gray-200 rounded-lg py-[30px] px-[30px]">
-            {/* Цена */}
+          <div className="left w-[360px] h-[1386px] border border-gray-200 rounded-lg py-[30px] px-[30px]">
             <div className="flex items-center justify-between">
               <h1 className="text-[16px]">Цена (cум)</h1>
               <GoChevronUp size={30} />
@@ -270,7 +254,6 @@ function ProductsPage() {
               />
             </div>
 
-            {/* Наличие */}
             <div className="py-[30px]">
               <h1 className="text-[16px] mb-3">Наличие</h1>
               <label className="flex items-center gap-3 border border-[#ed3a2d] rounded-md px-4 py-3 cursor-pointer">
@@ -282,7 +265,6 @@ function ProductsPage() {
               </label>
             </div>
 
-            {/* Бренд */}
             <div className="py-[10px] border-t border-gray-100">
               <div className="flex items-center justify-between mb-4">
                 <h1 className="text-[16px]">Бренд</h1>
@@ -307,7 +289,6 @@ function ProductsPage() {
               </div>
             </div>
 
-            {/* Емкость аккумулятора */}
             <div className="py-[30px] border-t border-gray-100">
               <div className="flex items-center justify-between mb-4">
                 <h1 className="text-[16px]">Емкость аккумулятора</h1>
@@ -329,7 +310,6 @@ function ProductsPage() {
               </div>
             </div>
 
-            {/* Страна производитель */}
             <div className="py-[30px] border-t border-gray-100">
               <div className="flex items-center justify-between mb-4">
                 <h1 className="text-[16px]">Страна производитель</h1>
@@ -351,7 +331,6 @@ function ProductsPage() {
               </div>
             </div>
 
-            {/* Yopiq filtrlar */}
             <div className="flex flex-col gap-6 py-[10px] border-t border-gray-100">
               {collapsedFilters.map((filter, index) => (
                 <div
@@ -364,110 +343,172 @@ function ProductsPage() {
               ))}
             </div>
 
-            {/* Показать */}
             <button className="w-full mt-8 h-12 bg-[#ed3a2d] text-white text-[15px] font-medium rounded-md cursor-pointer transition-opacity hover:opacity-90">
               Показать
             </button>
           </div>
 
           <div className="right">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3">
-              {products.map((p) => (
-                <article key={p.image} className={card}>
-                  <span className="absolute right-3 top-4 z-10 grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-red-500 to-red-600 text-[13px] font-semibold text-white shadow-lg shadow-red-500/30 transition-transform duration-300 group-hover:scale-110">
-                    -{p.discount}%
-                  </span>
-
-                  <div className="mx-3 mt-3 flex h-[124px] items-center justify-center rounded-lg transition-colors duration-300 group-hover:bg-red-50">
-                    <img
-                      src={p.image}
-                      alt={p.line1}
-                      loading="lazy"
-                      className="h-[100px] w-full object-contain mix-blend-multiply transition-transform duration-500 motion-safe:group-hover:scale-110"
-                    />
-                  </div>
-
-                  <div className="mt-6 flex items-center justify-center gap-2 whitespace-nowrap px-2">
-                    <span className="text-[11px] text-neutral-400 line-through">
-                      {p.oldPrice} сум
+            {/* GRID rejim */}
+            {viewMode === "grid" && (
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3">
+                {products.map((p) => (
+                  <article key={p.image} className={card}>
+                    <span className="absolute right-3 top-4 z-10 grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-red-500 to-red-600 text-[13px] font-semibold text-white shadow-lg shadow-red-500/30 transition-transform duration-300 group-hover:scale-110">
+                      -{p.discount}%
                     </span>
-                    <span className="h-4 w-px bg-neutral-300" />
-                    <span className="text-[15px] font-bold text-[#E8382D]">
-                      {p.price} сум
-                    </span>
-                  </div>
 
-                  <h3 className="mt-4 min-h-[44px] px-2 text-[13px] font-bold leading-[22px] text-black">
-                    {p.line1}
-                    <br />
-                    {p.line2}
-                  </h3>
+                    <div className="mx-3 mt-3 flex h-[124px] items-center justify-center rounded-lg transition-colors duration-300 group-hover:bg-red-50">
+                      <img
+                        src={p.image}
+                        alt={p.line1}
+                        loading="lazy"
+                        className="h-[100px] w-full object-contain mix-blend-multiply transition-transform duration-500 motion-safe:group-hover:scale-110"
+                      />
+                    </div>
 
-                  <p className="mt-4 text-[12px] font-light text-neutral-400">
-                    Предложение заканчивается через:
-                  </p>
-
-                  <div className="mx-4 mb-5 mt-3 grid grid-cols-4">
-                    <div className="flex flex-col items-center">
-                      <span className="text-[18px] font-light tabular-nums text-neutral-700 transition-colors duration-300 group-hover:text-[#E8382D]">
-                        {p.time[0]}
+                    <div className="mt-6 flex items-center justify-center gap-2 whitespace-nowrap px-2">
+                      <span className="text-[11px] text-neutral-400 line-through">
+                        {p.oldPrice} сум
                       </span>
-                      <span className="text-[9px] font-light text-neutral-400">
-                        дней
+                      <span className="h-4 w-px bg-neutral-300" />
+                      <span className="text-[15px] font-bold text-[#E8382D]">
+                        {p.price} сум
                       </span>
                     </div>
-                    <div className="flex flex-col items-center border-l border-neutral-200">
-                      <span className="text-[18px] font-light tabular-nums text-neutral-700 transition-colors duration-300 group-hover:text-[#E8382D]">
-                        {p.time[1]}
-                      </span>
-                      <span className="text-[9px] font-light text-neutral-400">
-                        часов
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-center border-l border-neutral-200">
-                      <span className="text-[18px] font-light tabular-nums text-neutral-700 transition-colors duration-300 group-hover:text-[#E8382D]">
-                        {p.time[2]}
-                      </span>
-                      <span className="text-[9px] font-light text-neutral-400">
-                        минут
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-center border-l border-neutral-200">
-                      <span className="text-[18px] font-light tabular-nums text-neutral-700 transition-colors duration-300 group-hover:text-[#E8382D]">
-                        {p.time[3]}
-                      </span>
-                      <span className="text-[9px] font-light text-neutral-400">
-                        секунд
-                      </span>
-                    </div>
-                  </div>
 
-                  <div className="mt-auto flex border-t border-neutral-200">
-                    <button
-                      type="button"
-                      aria-label="В корзину"
-                      className="flex flex-1 justify-center py-4 text-[#E8382D] transition-colors duration-300 group-hover:bg-[#E8382D] group-hover:text-white active:scale-95"
-                    >
-                      <MdShoppingCart className="h-6 w-6" />
-                    </button>
-                    <button
-                      type="button"
-                      aria-label="В избранное"
-                      className="flex flex-1 justify-center border-x border-neutral-200 py-4 text-neutral-400 transition hover:bg-red-50 hover:text-[#E8382D] active:scale-95"
-                    >
-                      <MdFavorite className="h-6 w-6" />
-                    </button>
-                    <button
-                      type="button"
-                      aria-label="Сравнить"
-                      className="flex flex-1 justify-center py-4 text-neutral-400 transition hover:bg-neutral-100 hover:text-neutral-900 active:scale-95"
-                    >
-                      <LuScale className="h-6 w-6" />
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
+                    <h3 className="mt-4 min-h-[44px] px-2 text-[13px] font-bold leading-[22px] text-black">
+                      {p.line1}
+                      <br />
+                      {p.line2}
+                    </h3>
+
+                    <p className="mt-4 text-[12px] font-light text-neutral-400">
+                      Предложение заканчивается через: 
+                    </p>
+
+                    <div className="mx-4 mb-5 mt-3 grid grid-cols-4">
+                      <div className="flex flex-col items-center">
+                        <span className="text-[18px] font-light tabular-nums text-neutral-700 transition-colors duration-300 group-hover:text-[#E8382D]">
+                          {p.time[0]}
+                        </span>
+                        <span className="text-[9px] font-light text-neutral-400">
+                          дней
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-center border-l border-neutral-200">
+                        <span className="text-[18px] font-light tabular-nums text-neutral-700 transition-colors duration-300 group-hover:text-[#E8382D]">
+                          {p.time[1]}
+                        </span>
+                        <span className="text-[9px] font-light text-neutral-400">
+                          часов
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-center border-l border-neutral-200">
+                        <span className="text-[18px] font-light tabular-nums text-neutral-700 transition-colors duration-300 group-hover:text-[#E8382D]">
+                          {p.time[2]}
+                        </span>
+                        <span className="text-[9px] font-light text-neutral-400">
+                          минут
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-center border-l border-neutral-200">
+                        <span className="text-[18px] font-light tabular-nums text-neutral-700 transition-colors duration-300 group-hover:text-[#E8382D]">
+                          {p.time[3]}
+                        </span>
+                        <span className="text-[9px] font-light text-neutral-400">
+                          секунд
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mt-auto flex border-t border-neutral-200">
+                      <button
+                        type="button"
+                        aria-label="В корзину"
+                        className="flex flex-1 justify-center py-4 text-[#E8382D] transition-colors duration-300 group-hover:bg-[#E8382D] group-hover:text-white active:scale-95"
+                      >
+                        <MdShoppingCart className="h-6 w-6" />
+                      </button>
+                      <button
+                        type="button"
+                        aria-label="В избранное"
+                        className="flex flex-1 justify-center border-x border-neutral-200 py-4 text-neutral-400 transition hover:bg-red-50 hover:text-[#E8382D] active:scale-95"
+                      >
+                        <MdFavorite className="h-6 w-6" />
+                      </button>
+                      <button
+                        type="button"
+                        aria-label="Сравнить"
+                        className="flex flex-1 justify-center py-4 text-neutral-400 transition hover:bg-neutral-100 hover:text-neutral-900 active:scale-95"
+                      >
+                        <LuScale className="h-6 w-6" />
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+
+            {/* LIST rejim */}
+            {viewMode === "list" && (
+              <div className="flex flex-col gap-4">
+                {products.map((p) => (
+                  <article
+                    key={p.image}
+                    className="group flex items-center gap-5 rounded-lg border border-neutral-200 bg-white p-4 transition-all duration-300 hover:border-[#E8382D]/40 hover:shadow-md"
+                  >
+                    <div className="flex h-[90px] w-[90px] shrink-0 items-center justify-center rounded-lg bg-neutral-50">
+                      <img
+                        src={p.image}
+                        alt={p.line1}
+                        loading="lazy"
+                        className="h-[70px] w-[70px] object-contain mix-blend-multiply"
+                      />
+                    </div>
+
+                    <div className="flex-1">
+                      <h3 className="text-[14px] font-bold text-black">
+                        {p.line1} {p.line2}
+                      </h3>
+                      <p className="mt-2 flex items-center gap-2 text-[13px]">
+                        <span className="text-neutral-400 line-through">
+                          {p.oldPrice} сум
+                        </span>
+                        <span className="font-bold text-[#E8382D]">
+                          {p.price} сум
+                        </span>
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        aria-label="В корзину"
+                        className="flex h-10 w-10 items-center justify-center rounded-md text-[#E8382D] transition-colors hover:bg-[#E8382D] hover:text-white"
+                      >
+                        <MdShoppingCart className="h-5 w-5" />
+                      </button>
+                      <button
+                        type="button"
+                        aria-label="В избранное"
+                        className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-400 transition hover:bg-red-50 hover:text-[#E8382D]"
+                      >
+                        <MdFavorite className="h-5 w-5" />
+                      </button>
+                      <button
+                        type="button"
+                        aria-label="Сравнить"
+                        className="flex h-10 w-10 items-center justify-center rounded-md text-neutral-400 transition hover:bg-neutral-100 hover:text-neutral-900"
+                      >
+                        <LuScale className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+
             <div className="py-8 m-auto">
               <div className="w-[217px] w-fit px-4 border m-auto border-red-600 rounded-lg">
                 <h3 className="py-2">Показать еще</h3>
@@ -484,15 +525,14 @@ function ProductsPage() {
                     <span>28</span>
                     <span>27</span>
                   </div>
-
                   <FaAngleRight size={30} />
                 </div>
               </div>
+
               <div className="mt-10">
                 <h2 className="text-xl font-medium mb-4">
                   Популярные категории и модели
                 </h2>
-
                 <div className="flex flex-wrap gap-3">
                   {tags.map((tag, index) => (
                     <button
@@ -509,7 +549,7 @@ function ProductsPage() {
                   ))}
                 </div>
               </div>
-              {/* ------------------ */}
+
               <div className="mx-auto max-w-[1200px] px-4 py-8">
                 <div className="mb-6 flex items-center justify-between">
                   <h2 className="text-[20px] font-semibold text-neutral-900">
@@ -524,10 +564,10 @@ function ProductsPage() {
                   </a>
                 </div>
 
-                <div className="grid  grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 ">
-                  {productss.slice(0, 5).map((p) => (
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3">
+                  {cheaperProducts.map((p) => (
                     <article key={p.image} className={card}>
-                      <div className="mx-3 mt-3 flex h-[132px]  items-center justify-center rounded-lg transition-colors duration-300 group-hover:bg-red-50">
+                      <div className="mx-3 mt-3 flex h-[132px] items-center justify-center rounded-lg transition-colors duration-300 group-hover:bg-red-50">
                         <img
                           src={p.image}
                           alt={p.line1}
@@ -574,10 +614,10 @@ function ProductsPage() {
                   ))}
                 </div>
               </div>
-              {/* ------------------------ */}
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

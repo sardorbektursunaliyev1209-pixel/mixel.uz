@@ -48,32 +48,30 @@ export default function Recomend() {
 
         <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {recomend.map((product) => (
-            <Link
-              key={product.id}
-              to={`/deteil/${product.id}`}
-              className="contents"
-            >
-              <div className="group bg-white border border-slate-200/70 rounded-2xl p-4 flex flex-col justify-between hover:shadow-xl hover:border-red-100 hover:-translate-y-1 transition-all duration-300">
-                <div className="w-full h-40 flex items-center justify-center mb-4 overflow-hidden rounded-xl bg-slate-50/50 p-2">
-                  <img
-                    src={product.image}
-                    alt={product.line1}
-                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
+            <div className="">
+              <Link key={product.id} to={`/deteil/${product.id}`} className="">
+                <div className="group bg-white border border-slate-200/70 rounded-2xl p-4 flex flex-col justify-between hover:shadow-xl hover:border-red-100 hover:-translate-y-1 transition-all duration-300">
+                  <div className="w-full h-40 flex items-center justify-center mb-4 overflow-hidden rounded-xl bg-slate-50/50 p-2">
+                    <img
+                      src={product.image}
+                      alt={product.line1}
+                      className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="text-center flex-1 flex flex-col justify-end">
+                    <p className="text-sm font-bold text-[#d9383a] mb-0.5 tracking-tight">
+                      {product.price} сум/мес
+                    </p>
+                    <p className="text-xs text-slate-400 line-through mb-2 font-medium">
+                      {product.oldPrice} сум
+                    </p>
+                    <h3 className="text-xs font-semibold text-slate-700 line-clamp-2 leading-relaxed mb-4 min-h-[36px] group-hover:text-slate-900 transition-colors">
+                      {product.line1}
+                      {product.line2 && <> {product.line2}</>}
+                    </h3>
+                  </div>
                 </div>
-                <div className="text-center flex-1 flex flex-col justify-end">
-                  <p className="text-sm font-bold text-[#d9383a] mb-0.5 tracking-tight">
-                    {product.price} сум/мес
-                  </p>
-                  <p className="text-xs text-slate-400 line-through mb-2 font-medium">
-                    {product.oldPrice} сум
-                  </p>
-                  <h3 className="text-xs font-semibold text-slate-700 line-clamp-2 leading-relaxed mb-4 min-h-[36px] group-hover:text-slate-900 transition-colors">
-                    {product.line1}
-                    {product.line2 && <> {product.line2}</>}
-                  </h3>
-                </div>
-              </div>
+              </Link>
 
               <div className="pt-3 border-t border-slate-100 flex justify-between items-center text-slate-400">
                 <button className="p-2 hover:bg-red-50 hover:text-red-500 rounded-xl transition-all active:scale-95">
@@ -86,7 +84,7 @@ export default function Recomend() {
                   <FiBarChart2 className="text-lg" />
                 </button>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

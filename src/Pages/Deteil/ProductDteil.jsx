@@ -6,8 +6,7 @@ import { HiOutlineTruck, HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { FiRefreshCw } from "react-icons/fi";
 import { products } from "../../Data/Product.js";
 import { useParams } from "react-router-dom";
-
-
+import InstallmentModal from "../../Componets/InstallmentModal/InstallmentModal";
 
 const specs = [
   { label: "Название", value: "MacBook Pro 13 MXK32ZP/A Space Gray" },
@@ -26,9 +25,9 @@ const modelInfo = [
 function ProductDteil() {
   const { id } = useParams();
   const [activeImage, setActiveImage] = useState(0);
-  const product = products.find((p) => 
-    p.id === Number(id)
-  )
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const product = products.find((p) => p.id === Number(id));
   if (!product) {
     return <div className="container_1200">maxsulot topilmadi </div>;
   }
@@ -40,28 +39,24 @@ function ProductDteil() {
       </div>
 
       <div className="flex gap-8 mt-6 items-start">
-       <div className="w-[300px] shrink-0">
-  <div className="w-full border border-gray-200 rounded-lg overflow-hidden">
-    <img src={product.image} alt="" className="w-full aspect-square object-contain" />
-  </div>
-</div>
+        <div className="w-[300px] shrink-0">
+          <div className="w-full border border-gray-200 rounded-lg overflow-hidden">
+            <img
+              src={product.image}
+              alt=""
+              className="w-full aspect-square object-contain"
+            />
+          </div>
+        </div>
 
-          <div className="flex-1">
+        <div className="flex-1">
           <h1 className="text-2xl font-semibold">
-{
-  product.line1
-}
--
-{
-  product.line2
-}
+            {product.line1}-{product.line2}
           </h1>
 
           <div className="flex items-center gap-3 mt-4">
             <span className="text-2xl font-bold text-[#ed3a2d]">
-{
-  product.price
-}сум
+              {product.price}сум
             </span>
             <IoInformationCircleOutline size={20} className="text-gray-400" />
             <div className="flex items-center gap-4 ml-4 text-gray-400">
@@ -88,7 +83,9 @@ function ProductDteil() {
             <button className="h-11 px-8 bg-[#ed3a2d] text-white text-sm font-medium rounded-md cursor-pointer hover:opacity-90 transition-opacity">
               Купить сейчас
             </button>
-            <button className="h-11 px-8 bg-black text-white text-sm font-medium rounded-md cursor-pointer hover:opacity-90 transition-opacity">
+            <button onClick={()=>{
+              return setIsModalOpen(true)
+            }} className="h-11 px-8 bg-black text-white text-sm font-medium rounded-md cursor-pointer hover:opacity-90 transition-opacity">
               Купить в рассрочку сейчас
             </button>
           </div>
@@ -196,6 +193,12 @@ function ProductDteil() {
           </div>
         </div>
       </div>
+      
+    {
+      isModalOpen &&(
+        <InstallmentModal onClose={()=>setIsModalOpen(false)}/>
+      )
+    }
     </div>
   );
 }
